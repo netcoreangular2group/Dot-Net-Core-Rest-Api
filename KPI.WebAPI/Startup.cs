@@ -50,6 +50,7 @@ namespace KPI.WebAPI
             //refactor
             services.LoadInstalledModules(Modules, _hostingEnvironment);
             services.AddCustomizedDataStore(Configuration);
+            services.AddCors();
             services.AddMvc().AddXmlSerializerFormatters();
             return services.Build(Configuration, _hostingEnvironment);
         }
@@ -69,7 +70,7 @@ namespace KPI.WebAPI
             //{
             //    await context.Response.WriteAsync("Hello World!");
             //});
-
+            app.UseCors(buider => buider.WithOrigins("*"));
             app.UseMvc();
         }
     }
